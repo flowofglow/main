@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Criminal and Antisocial History Assessment Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .section {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #generated-paragraph {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .question {
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Criminal and Antisocial History Assessment Tool</h1>
+
+    <div class="section">
+        <h2>Criminal History</h2>
+        <p class="question">"Can you tell me about your criminal history, if any?"</p>
+        <form id="criminal-history-form">
+            <input type="checkbox" name="criminal-history" value="they have no known criminal history."> No known criminal history<br>
+            <input type="checkbox" name="criminal-history" value="they have been convicted of non-violent offenses."> Convicted of non-violent offenses<br>
+            <input type="checkbox" name="criminal-history" value="they have been convicted of violent offenses."> Convicted of violent offenses<br>
+            <input type="checkbox" name="criminal-history" value="they have a history of substance-related offenses."> History of substance-related offenses<br>
+            <input type="checkbox" name="criminal-history" value="they have been incarcerated."> Incarcerated<br>
+            <input type="checkbox" name="criminal-history" value="they have a history of probation violations."> History of probation violations<br>
+        </form>
+    </div>
+
+    <div class="section">
+        <h2>Antisocial Behaviors</h2>
+        <p class="question">"Have you engaged in behaviors that could be considered antisocial, such as aggression or lying?"</p>
+        <form id="antisocial-behaviors-form">
+            <input type="checkbox" name="antisocial-behaviors" value="they have engaged in aggressive behaviors."> Engaged in aggressive behaviors<br>
+            <input type="checkbox" name="antisocial-behaviors" value="they have shown a lack of remorse for their actions."> Lack of remorse for actions<br>
+            <input type="checkbox" name="antisocial-behaviors" value="they have a history of lying and deceit."> History of lying and deceit<br>
+            <input type="checkbox" name="antisocial-behaviors" value="they have a history of stealing."> History of stealing<br>
+            <input type="checkbox" name="antisocial-behaviors" value="they have difficulty maintaining employment."> Difficulty maintaining employment<br>
+            <input type="checkbox" name="antisocial-behaviors" value="they have a history of vandalism or property destruction."> History of vandalism or property destruction<br>
+        </form>
+    </div>
+
+    <div class="section">
+        <h2>Influences and Environment</h2>
+        <p class="question">"What factors in your environment or influences from others might have contributed to your behavior?"</p>
+        <form id="influences-environment-form">
+            <input type="checkbox" name="influences-environment" value="they were influenced by antisocial peers."> Influenced by antisocial peers<br>
+            <input type="checkbox" name="influences-environment" value="they grew up in a high-crime area."> Grew up in a high-crime area<br>
+            <input type="checkbox" name="influences-environment" value="they experienced trauma or abuse in childhood."> Experienced trauma or abuse in childhood<br>
+            <input type="checkbox" name="influences-environment" value="they have a family history of criminal behavior."> Family history of criminal behavior<br>
+            <input type="checkbox" name="influences-environment" value="they lacked positive role models."> Lacked positive role models<br>
+            <input type="checkbox" name="influences-environment" value="they have been exposed to substance abuse within the family."> Exposed to substance abuse within the family<br>
+        </form>
+    </div>
+
+    <div class="section">
+        <h2>Impact on Mental Health</h2>
+        <p class="question">"How have your criminal or antisocial behaviors impacted your mental health?"</p>
+        <form id="impact-on-mental-health-form">
+            <input type="checkbox" name="impact-on-mental-health" value="their criminal history has caused significant stress or anxiety."> Criminal history has caused significant stress or anxiety<br>
+            <input type="checkbox" name="impact-on-mental-health" value="their antisocial behaviors have led to social isolation."> Antisocial behaviors have led to social isolation<br>
+            <input type="checkbox" name="impact-on-mental-health" value="they have received mental health treatment as a result of their behaviors."> Received mental health treatment as a result of their behaviors<br>
+            <input type="checkbox" name="impact-on-mental-health" value="their environment has contributed to ongoing mental health challenges."> Environment has contributed to ongoing mental health challenges<br>
+            <input type="checkbox" name="impact-on-mental-health" value="they have developed coping mechanisms to manage their past behaviors."> Developed coping mechanisms to manage past behaviors<br>
+        </form>
+    </div>
+
+    <button onclick="generateEnhancedParagraph()">Generate Paragraph</button>
+
+    <h2>Generated Paragraph</h2>
+    <p id="generated-paragraph"></p>
+
+    <script src="https://unpkg.com/compromise"></script>
+      <script src="https://unpkg.com/compromise"></script>
+    <script>
+    function generateEnhancedParagraph() {
+        const sections = [
+            { id: 'criminal-history-form', title: 'criminal history' },
+            { id: 'antisocial-behaviors-form', title: 'antisocial behaviors' },
+            { id: 'influences-environment-form', title: 'influences and environment' },
+            { id: 'impact-on-mental-health-form', title: 'impact on mental health' }
+        ];
+
+        let facts = [];
+
+        sections.forEach(section => {
+            const form = document.getElementById(section.id);
+            const selectedOptions = form.querySelectorAll('input[type="checkbox"]:checked');
+            selectedOptions.forEach(option => {
+                facts.push(option.value);
+            });
+        });
+
+        let paragraph = `The assessment of the individual's criminal and antisocial history reveals the following insights. `;
+
+        if (facts.length > 0) {
+            const groupedFacts = {
+                criminal: facts.filter(f => f.includes('criminal') || f.includes('convicted') || f.includes('incarcerated')),
+                behavior: facts.filter(f => f.includes('behaviors') || f.includes('lying') || f.includes('stealing') || f.includes('vandalism')),
+                environment: facts.filter(f => f.includes('environment') || f.includes('influenced') || f.includes('grew up') || f.includes('family')),
+                mentalHealth: facts.filter(f => f.includes('mental health') || f.includes('stress') || f.includes('anxiety') || f.includes('isolation'))
+            };
+
+            if (groupedFacts.criminal.length > 0) {
+                paragraph += `Regarding criminal history, ${nlp(groupedFacts.criminal.join('. ')).sentences().toList().join(' ')} `;
+            }
+            if (groupedFacts.behavior.length > 0) {
+                paragraph += `In terms of antisocial behaviors, ${nlp(groupedFacts.behavior.join('. ')).sentences().toList().join(' ')} `;
+            }
+            if (groupedFacts.environment.length > 0) {
+                paragraph += `Environmental factors include: ${nlp(groupedFacts.environment.join('. ')).sentences().toList().join(' ')} `;
+            }
+            if (groupedFacts.mentalHealth.length > 0) {
+                paragraph += `Regarding mental health impact, ${nlp(groupedFacts.mentalHealth.join('. ')).sentences().toList().join(' ')} `;
+            }
+        } else {
+            paragraph += `No significant issues or noteworthy aspects were reported regarding the individual's criminal and antisocial history. `;
+        }
+
+        paragraph += `This evaluation provides a foundation for understanding the individual's background and developing appropriate support mechanisms tailored to their specific needs.`;
+
+        // Apply NLP enhancements
+        let enhancedParagraph = nlp(paragraph)
+            .sentences()
+            .toPastTense()
+            .out('text');
+
+        // Further refinements
+        enhancedParagraph = enhancedParagraph
+            .replace(/\s+/g, ' ')
+            .replace(/\s+\./g, '.')
+            .replace(/\s+,/g, ',');
+
+        const paragraphElement = document.getElementById('generated-paragraph');
+        paragraphElement.textContent = enhancedParagraph;
+
+        // Copy the generated paragraph to the clipboard
+        navigator.clipboard.writeText(paragraphElement.textContent).then(() => {
+            alert('Enhanced paragraph generated and copied to clipboard');
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+    }
+    </script>
+</body>
+</html>
