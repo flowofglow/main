@@ -12,7 +12,7 @@
 
     <script>
         async function testHuggingFaceAPIKey() {
-            const apiKey = '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'; // Replace with your actual Hugging Face API key
+            const apiKey = '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'; // Replace with your actual Hugging Face API key
 
             try {
                 const response = await fetch('https://api-inference.huggingface.co/models/gpt2', {
@@ -21,7 +21,7 @@
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${apiKey}`
                     },
-                    body: JSON.stringify({ inputs: "Test if the API key is working" })
+                    body: JSON.stringify({ inputs: "Hello, how are you?" })
                 });
 
                 if (!response.ok) {
